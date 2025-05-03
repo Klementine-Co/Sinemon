@@ -1,2 +1,2 @@
-# Sinemon
-Sinemon (si · nuh · muhn)
+# Sinemon (si · nuh · muhn)
+
