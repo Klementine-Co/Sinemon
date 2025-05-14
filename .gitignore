@@ -1,0 +1,176 @@
+# General
+*.DS_Store
+*.log
+*.pot
+*.pyc
+*.pyo
+*.swp
+*~
+__pycache__/
+*.sqlite3
+
+# Byte-compiled / optimized / DLL files
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Distribution / packaging
+.Python
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+*.egg
+*.egg-info/
+dist/
+build/
+*.wheel
+
+# Bundle artifact
+*.jsbundle
+
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.bundle/
+
+
+# Frontend (React/Vue/Angular)
+dist/
+.next/
+.nuxt/
+.vuepress/
+*.tsbuildinfo
+
+
+# React Native iOS
+ios/Pods/
+ios/build/
+ios/DerivedData/
+ios/*.xcworkspace/xcuserdata/
+ios/*.xcodeproj/project.xcworkspace/
+ios/*.xcodeproj/xcuserdata/
+ios/*.xcodeproj/project.xcworkspace/xcuserdata/
+ios/.DS_Store
+ios/*.xcuserdatad/
+ios/xcuserdata/
+
+# Xcode
+#
+build/
+*.pbxuser
+!default.pbxuser
+*.mode1v3
+!default.mode1v3
+*.mode2v3
+!default.mode2v3
+*.perspectivev3
+!default.perspectivev3
+xcuserdata
+*.xccheckout
+*.moved-aside
+DerivedData
+*.hmap
+*.ipa
+*.xcuserstate
+**/.xcode.env.local
+
+# Android/IntelliJ
+#
+build/
+.idea
+.gradle
+local.properties
+*.iml
+*.hprof
+.cxx/
+*.keystore
+!debug.keystore
+.kotlin/
+
+# Ruby / CocoaPods
+**/Pods/
+/vendor/bundle/
+
+# Django
+*.log
+local_settings.py
+db.sqlite3
+/media/
+/staticfiles/
+*.pyc
+*.pyo
+__pycache__/
+*.sqlite3
+*.env
+
+# Secret settings and environment files
+.env
+.env.local
+.env.production
+.env.development
+/secrets.json
+
+# Pytest cache
+.pytest_cache/
+
+
+# Sphinx documentation
+docs/_build/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# Django stuff:
+*.log
+*.pot
+*.pyc
+*.pyc
+*.pyo
+*.db
+*.sqlite3
+media/
+static/
+/staticfiles/
+
+# VSCode
+.vscode/
+.idea/
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Thumbnails
+._*
+
+# Temporary files
+*.tmp
+*.temp
+*.swp
+*~
+.idea/
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# IDEs
+.vscode/
+.idea/
+
+# Temporary files created by Metro to check the health of the file watcher
+.metro-health-check*
+
+# Large database and SQL files
+SinemonBackend/database/files/*.accdb
+SinemonBackend/database/base tables/*.sql
+
