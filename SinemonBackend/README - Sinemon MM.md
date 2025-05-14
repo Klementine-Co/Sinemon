@@ -1,13 +1,3 @@
-# Local Installation
-
-## **Step 1: Clone the Repository** 
-
-```
-sh
-
-git clone https://github.com/your-username/your-project.git
-cd your-project
-```
 ### 🔑 Regenerate the Django SECRET_KEY after cloning
 
 After cloning the repository, run the following command to generate a new SECRET_KEY

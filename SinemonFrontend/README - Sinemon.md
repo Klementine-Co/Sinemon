@@ -1,13 +1,4 @@
-# Local Installation of SinemonUser and SinemonProvider
 
-## **Step 1: Clone the Repository** 
-
-```
-sh
-
-git clone https://github.com/your-username/your-project.git
-cd your-project
-```
 
 ## **Step 2: Install Volta (If Not Installed)**
 

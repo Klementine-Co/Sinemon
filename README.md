@@ -1,4 +1,15 @@
 # Sinemon (si · nuh · muhn)
+
+#### Local Installation of Sinemon APP
+##### **Clone the Repository** 
+```
+sh
+
+git clone https://github.com/Klementine-Co/Sinemon.git
+cd Sinemon
+```
+
+
 ##### Using the File "Sinemon Project.docx", this README was summarized with help of AI.
 # 🩺 Sinemon: Reimagining Non-Emergency Healthcare
 **Version:** 1  
