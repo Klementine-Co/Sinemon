@@ -1,3 +1,5 @@
+## Recommend Using Python 3.9
+
 ### 🔑 Regenerate the Django SECRET_KEY after cloning
 
 After cloning the repository, run the following command to generate a new SECRET_KEY
