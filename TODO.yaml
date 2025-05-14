@@ -1,0 +1,73 @@
+#Things I should've done and still can be done at any time. Most likley will be continuously updated.
+
+ 
+TODO:
+  Remove commented out code and improve code conciseness. Rename variables for better readability. I experienced burnout multiple times during this project's conception. And coding sessions that lasted well into the next day in my time off from my primary 9 to 5. Consequently, I laid off on the neatness and ease I subject myself to on a day to day to meet project milestones. 
+
+
+
+#React Native
+TODO: 
+  npm install @react-native-community/masked-view
+  npm warn deprecated @react-native-community/masked-view@0.1.11: Repository was moved to @react-native-masked-view/masked-view
+
+
+  npm install hermes-engine
+  npm warn deprecated hermes-engine@0.11.0: Package no longer supported. Contact Support at https://www.npmjs.com/support for more info.
+
+  
+  npm install react-native-elements
+  npm warn deprecated lodash.isequal@4.5.0: This package is deprecated. Use require('node:util').isDeepStrictEqual instead.
+
+  
+ npm install react-native-neomorph-shadows
+  npm warn deprecated @react-native-community/art@1.2.0: If you need a similar package, please consider using react-native-svg or @shopify/react-native-skia
+
+  
+ npm install react-native-safe-area-context
+ 4.7.1
+
+
+TODO: 
+  Begin developing out project needs in core codebase to phase out dependencies.
+
+
+TODO: 
+  Link shared folder between SinemonUser and SinemonProvider to reduce maintenance cost.
+
+
+
+#SinemonBackend
+TODO: 
+  I appreciate the https://github.com/awesto/django-shop project. It showed me alot about django. I initially was learning to do a shop in django at the start of the 2020 pandemic. I recycled my intital project. For Sinemon the nuances of the recycled code is no longer needed and a regualr install of django is sufficient and more secure. This is part of the todo.
+
+
+TODO: 
+  Transfer business logic from socket server to consumer server.
+
+
+TODO: 
+  I became interested in how big platform applications are so efficient, and became tangled with distributed systems and message brokers. After further research, RabbitMQ may be unwarranted. TODO is to remove RabbitMQ integration and integrate support for REDIS. 
+
+
+
+
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  

@@ -1,0 +1,1 @@
+export const IPADDR = "IP ADDRESS OF DJANGO SERVER";

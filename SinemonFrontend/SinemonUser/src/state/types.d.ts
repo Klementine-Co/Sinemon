@@ -1,0 +1,24 @@
+type StateAction = { type: String, payload: object, helper_type:Number|String|MyVisit};
+type UserState = {
+    user:User;
+    queue:Queue;
+    myvisit:MyVisit;
+    notifications:Threads[];
+    // initUser: (user: User) => void;
+    // // logout: (user: User) => void;
+    // // login: (user: User) => void;
+    // setMyData: (mydata: UserData) => void;
+    // addMyData: (item: UserDataItem, ITEM:String) => void;
+    // deleteMyData: (item: UserDataItem) => void;
+    // setMyVisit: (myvisit: MyVisit) => void;
+    // joinQueue:(queueaction: QueueAction) => void;
+    // leaveQueue:(queueaction: QueueAction) => void;
+    // finishQueue:(queueaction: QueueAction) => void;
+    // setMyQueue: (queuedata: QueueData) => void;
+    // rateVisit: (rate: Rate) => void;
+    // commentVisit: (comment: VisitComment) => void;
+    // answerQuestion: (question: Question) => void;
+    // reviewVisit: (review: Review) => void;
+    // setNotifications: (notifications: Message[]) => void;
+    socket: Socket;
+};

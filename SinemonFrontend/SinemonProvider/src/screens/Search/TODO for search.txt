@@ -1,0 +1,10 @@
+
+
+var result = data.filter(function(v, i) {
+  return ((v["term_id"] == 5 || v["term_id"] == 6) && v.type == "car");
+})
+
+multi filter
+
+
+#todo add sort state variable for ascending and descending

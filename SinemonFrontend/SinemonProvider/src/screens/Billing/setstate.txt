@@ -1,0 +1,6 @@
+  setStyle(prevStyle => ({
+        ...prevStyle,
+        font: { ...prevStyle.font, align: event.target.value }
+    }));
+ //console.log(style);
+  }}

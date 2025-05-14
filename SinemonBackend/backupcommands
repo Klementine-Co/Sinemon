@@ -1,0 +1,5 @@
+pg_dump -U {username} -W -F c {db_name} --exclude-table=auth_user > {mmddyyyy}_database_backup.DUMP
+
+
+pg_restore -U {username} -d {db_name} {mmddyyyy}_database_backup.DUMP --no-owner --no-privileges
+

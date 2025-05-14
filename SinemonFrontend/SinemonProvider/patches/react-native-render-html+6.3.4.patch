@@ -1,0 +1,262 @@
+diff --git a/node_modules/react-native-render-html/lib/commonjs/TChildrenRenderer.js b/node_modules/react-native-render-html/lib/commonjs/TChildrenRenderer.js
+index 9d16738..10ef3ff 100644
+--- a/node_modules/react-native-render-html/lib/commonjs/TChildrenRenderer.js
++++ b/node_modules/react-native-render-html/lib/commonjs/TChildrenRenderer.js
+@@ -7,23 +7,27 @@ exports.default = exports.tchildrenRendererDefaultProps = void 0;
+ 
+ var _renderChildren = _interopRequireDefault(require("./renderChildren"));
+ 
+-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
++function _interopRequireDefault(obj) { 
++  return obj && obj.__esModule ? obj : { default: obj }; 
++}
+ 
+ /**
+- * A component to render collections of tnodes.
+- * Especially useful when used with {@link useTNodeChildrenProps}.
++ * Default props for TChildrenRenderer.
+  */
+-const TChildrenRenderer = _renderChildren.default.bind(null);
+-
+ const tchildrenRendererDefaultProps = {
+   propsForChildren: {}
+ };
++
++exports.tchildrenRendererDefaultProps = tchildrenRendererDefaultProps;
++
+ /**
+- * @ignore
++ * A component to render collections of tnodes.
++ * Especially useful when used with {@link useTNodeChildrenProps}.
+  */
++const TChildrenRenderer = (props) => {
++  const mergedProps = { ...tchildrenRendererDefaultProps, ...props }; 
++  return (0, _renderChildren.default)(mergedProps); // Ensure correct function call
++};
+ 
+-exports.tchildrenRendererDefaultProps = tchildrenRendererDefaultProps;
+-TChildrenRenderer.defaultProps = tchildrenRendererDefaultProps;
+ var _default = TChildrenRenderer;
+ exports.default = _default;
+-//# sourceMappingURL=TChildrenRenderer.js.map
+\ No newline at end of file
+diff --git a/node_modules/react-native-render-html/lib/commonjs/TNodeChildrenRenderer.js b/node_modules/react-native-render-html/lib/commonjs/TNodeChildrenRenderer.js
+index 50b43ca..9bfc9b5 100644
+--- a/node_modules/react-native-render-html/lib/commonjs/TNodeChildrenRenderer.js
++++ b/node_modules/react-native-render-html/lib/commonjs/TNodeChildrenRenderer.js
+@@ -8,8 +8,6 @@ exports.default = void 0;
+ 
+ var _SharedPropsProvider = require("./context/SharedPropsProvider");
+ 
+-var _TChildrenRenderer = require("./TChildrenRenderer");
+-
+ var _renderChildren = _interopRequireDefault(require("./renderChildren"));
+ 
+ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+@@ -17,44 +15,20 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
+ function isCollapsible(tnode) {
+   return tnode.type === 'block' || tnode.type === 'phrasing';
+ }
++
+ /**
+- * A hook especially useful when one need to tamper with children in a custom
++ * A hook especially useful when one needs to tamper with children in a custom
+  * renderer. Should be used with {@link TChildrenRenderer}.
+- *
+- * @example
+- * For example, a custom renderer which inserts ads in an article:
+- *
+- * ```tsx
+- * function ArticleRenderer(props) {
+- *   const { tnode, TDefaultRenderer, ...defaultRendererProps } = props;
+- *   const tchildrenProps = useTNodeChildrenProps(props);
+- *   const firstChildrenChunk = tnode.children.slice(0, 2);
+- *   const secondChildrenChunk = tnode.children.slice(2, 4);
+- *   const thirdChildrenChunk = tnode.children.slice(4, 5);
+- *   return (
+- *     <TDefaultRenderer tnode={tnode} {...defaultRendererProps}>
+- *       <TChildrenRenderer {...tchildrenProps} tchildren={firstChildrenChunk} />
+- *       {firstChildrenChunk.length === 2 ? <AdComponent /> : null}
+- *       <TChildrenRenderer {...tchildrenProps} tchildren={secondChildrenChunk} />
+- *       {secondChildrenChunk.length === 2 ? <AdComponent /> : null}
+- *       <TChildrenRenderer {...tchildrenProps} tchildren={thirdChildrenChunk} />
+- *     </TDefaultRenderer>
+- *   );
+- * };
+- * ```
+  */
+-
+-
+ function useTNodeChildrenProps({
+   tnode,
+   propsForChildren,
+   disableMarginCollapsing = false,
+   renderChild
+ }) {
+-  const {
+-    enableExperimentalMarginCollapsing
+-  } = (0, _SharedPropsProvider.useSharedProps)();
++  const { enableExperimentalMarginCollapsing } = (0, _SharedPropsProvider.useSharedProps)();
+   const shouldCollapseChildren = enableExperimentalMarginCollapsing && !disableMarginCollapsing && isCollapsible(tnode);
++  
+   return {
+     propsForChildren,
+     disableMarginCollapsing: !shouldCollapseChildren,
+@@ -62,28 +36,18 @@ function useTNodeChildrenProps({
+     renderChild
+   };
+ }
++
+ /**
+  * A component to render all children of a {@link TNode}.
+  */
+-
+-
+ function TNodeChildrenRenderer(props) {
+   if (props.tnode.type === 'text') {
+-    // see https://github.com/DefinitelyTyped/DefinitelyTyped/issues/20544
+     return props.tnode.data;
+-  } // A tnode type will never change. We can safely
+-  // ignore the non-conditional rule of hooks.
+-  // eslint-disable-next-line react-hooks/rules-of-hooks
+-
++  }
+ 
+   return (0, _renderChildren.default)(useTNodeChildrenProps(props));
+ }
+-/**
+- * @ignore
+- */
+-
+ 
+-TNodeChildrenRenderer.defaultProps = _TChildrenRenderer.tchildrenRendererDefaultProps;
+ var _default = TNodeChildrenRenderer;
+ exports.default = _default;
+ //# sourceMappingURL=TNodeChildrenRenderer.js.map
+\ No newline at end of file
+diff --git a/node_modules/react-native-render-html/lib/commonjs/TNodeRenderer.js b/node_modules/react-native-render-html/lib/commonjs/TNodeRenderer.js
+index eafc942..d6bb7c3 100644
+--- a/node_modules/react-native-render-html/lib/commonjs/TNodeRenderer.js
++++ b/node_modules/react-native-render-html/lib/commonjs/TNodeRenderer.js
+@@ -50,72 +50,55 @@ function isGhostTNode(tnode) {
+  */
+ 
+ 
+-const TNodeRenderer = /*#__PURE__*/(0, _react.memo)(function MemoizedTNodeRenderer(props) {
+-  const {
+-    tnode
+-  } = props;
++const TNodeRenderer = /*#__PURE__*/(0, _react.memo)(function MemoizedTNodeRenderer({
++  tnode,
++  propsFromParent = { collapsedMarginTop: null }
++}) {
+   const sharedProps = (0, _SharedPropsProvider.useSharedProps)();
+   const renderRegistry = (0, _RenderRegistryProvider.useRendererRegistry)();
+   const TNodeChildrenRenderer = (0, _TChildrenRendererContext.useTNodeChildrenRenderer)();
+-  const tnodeProps = { ...props,
+-    TNodeChildrenRenderer,
+-    sharedProps
+-  };
+-  const renderer = tnode.type === 'block' || tnode.type === 'document' ? TDefaultBlockRenderer : tnode.type === 'text' ? TDefaultTextRenderer : tnode.type === 'phrasing' ? TDefaultPhrasingRenderer : _renderEmptyContent.default;
+-  const {
+-    assembledProps,
+-    Renderer
+-  } = (0, _useAssembledCommonProps.default)(tnodeProps, renderer);
++  const tnodeProps = { tnode, propsFromParent, TNodeChildrenRenderer, sharedProps };
++  const renderer = tnode.type === 'block' || tnode.type === 'document' 
++    ? TDefaultBlockRenderer 
++    : tnode.type === 'text' 
++      ? TDefaultTextRenderer 
++      : tnode.type === 'phrasing' 
++        ? TDefaultPhrasingRenderer 
++        : _renderEmptyContent.default;
++
++  const { assembledProps, Renderer } = (0, _useAssembledCommonProps.default)(tnodeProps, renderer);
+ 
+   switch (tnode.type) {
+     case 'empty':
+       return (0, _renderEmptyContent.default)(assembledProps);
+-
+     case 'text':
+-      const InternalTextRenderer = renderRegistry.getInternalTextRenderer(props.tnode.tagName);
+-
++      const InternalTextRenderer = renderRegistry.getInternalTextRenderer(tnode.tagName);
+       if (InternalTextRenderer) {
+         return /*#__PURE__*/_react.default.createElement(InternalTextRenderer, tnodeProps);
+-      } // If ghost line prevention is enabled and the text data is empty, render
+-      // nothing to avoid React Native painting a 20px height line.
+-      // See also https://git.io/JErwX
+-
+-
++      }
+       if (tnodeProps.tnode.data === '' && tnodeProps.sharedProps.enableExperimentalGhostLinesPrevention) {
+         return null;
+       }
+-
+       break;
+-
+     case 'phrasing':
+-      // When a TPhrasing node is anonymous and has only one child, its
+-      // rendering amounts to rendering its only child.
+-      if (tnodeProps.sharedProps.bypassAnonymousTPhrasingNodes && tnodeProps.tnode.tagName == null && tnodeProps.tnode.children.length <= 1) {
+-        return /*#__PURE__*/_react.default.createElement(TNodeChildrenRenderer, {
+-          tnode: props.tnode
+-        });
+-      } // If ghost line prevention is enabled and the tnode is an anonymous empty
+-      // phrasing node, render nothing to avoid React Native painting a 20px
+-      // height line. See also https://git.io/JErwX
+-
+-
+-      if (tnodeProps.sharedProps.enableExperimentalGhostLinesPrevention && tnodeProps.tnode.tagName == null && tnodeProps.tnode.children.every(isGhostTNode)) {
++      if (tnodeProps.sharedProps.bypassAnonymousTPhrasingNodes && !tnodeProps.tnode.tagName && tnodeProps.tnode.children.length <= 1) {
++        return /*#__PURE__*/_react.default.createElement(TNodeChildrenRenderer, { tnode });
++      }
++      if (tnodeProps.sharedProps.enableExperimentalGhostLinesPrevention && !tnodeProps.tnode.tagName && tnodeProps.tnode.children.every(isGhostTNode)) {
+         return null;
+       }
+-
+       break;
+   }
+ 
+-  const renderFn = tnode.type === 'block' || tnode.type === 'document' ? _renderBlockContent.default : _renderTextualContent.default;
++  const renderFn = tnode.type === 'block' || tnode.type === 'document' 
++    ? _renderBlockContent.default 
++    : _renderTextualContent.default;
++
+   return Renderer === null ? renderFn(assembledProps) : /*#__PURE__*/_react.default.createElement(Renderer, assembledProps);
+ });
+-const defaultProps = {
+-  propsFromParent: {
+-    collapsedMarginTop: null
+-  }
+-}; // @ts-expect-error default props must be defined
+ 
+-TNodeRenderer.defaultProps = defaultProps;
++
++
+ var _default = TNodeRenderer;
+ exports.default = _default;
+ //# sourceMappingURL=TNodeRenderer.js.map
+\ No newline at end of file
+diff --git a/node_modules/react-native-render-html/lib/commonjs/TRenderEngineProvider.js b/node_modules/react-native-render-html/lib/commonjs/TRenderEngineProvider.js
+index 3a700b6..fee8a0f 100644
+--- a/node_modules/react-native-render-html/lib/commonjs/TRenderEngineProvider.js
++++ b/node_modules/react-native-render-html/lib/commonjs/TRenderEngineProvider.js
+@@ -131,7 +131,16 @@ function TRenderEngineProvider({
+  */
+ 
+ 
+-TRenderEngineProvider.defaultProps = defaultTRenderEngineProviderProps;
++function TRenderEngineProvider({
++  children,
++  ...config
++} = defaultTRenderEngineProviderProps) {
++  const engine = (0, _useTRenderEngine.default)(config);
++  return /*#__PURE__*/_react.default.createElement(TRenderEngineContext.Provider, {
++    value: engine
++  }, children);
++}
++
+ /**
+  * @ignore
+  */

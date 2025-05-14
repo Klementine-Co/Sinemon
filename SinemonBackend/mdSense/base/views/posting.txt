@@ -1,0 +1,21 @@
+{
+    "city": "East Cherylton",
+    "state": "CA",
+    "zipcode": "37193",
+    "email": "bradley34@example.org",
+    "username": "bradley34@example.org",
+    "icon": null,
+    "first_name": "Bradley",
+    "middle_name": "Davis",
+    "last_name": "Nolen",
+    "street_address": "38411 Fisher Vista",
+    "street_address2": "1",
+    "phone_number": ""
+ }
+
+
+ {'Content-Length': '8',
+  'Content-Type': 'application/x-www-form-urlencoded',
+  'Host': '192.168.1.162:8003',
+  'User-Agent': 'curl/7.84.0',
+  'Accept': '*/*'}
