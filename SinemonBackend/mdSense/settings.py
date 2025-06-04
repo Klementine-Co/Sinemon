@@ -479,28 +479,12 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "mdSense.wsgi.application"
 
-# CACHES = {
-#     "default": {
-#         "BACKEND": "django_redis.cache.RedisCache",
-#         "LOCATION": "redis-13037.c292.ap-southeast-1-1.ec2.cloud.redislabs.com:13037",
-#         "OPTIONS": {
-#             "CLIENT_CLASS": "django_redis.client.DefaultClient",
-#             "PASSWORD":"CFRqJ4t0XRWu1rUvFBZjMeHxs1pFxChz",
-#         }
-#     }
-# }
-# SESSION_ENGINE = "django.contrib.sessions.backends.cache"
-# SESSION_CACHE_ALIAS = "default"
-
-# Database
-# https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
         "NAME": "postgres",
         "USER": "postgres",
-        # 'PASSWORD': 'sU7%4qea@EQJmDHrSKSPfa',
         "PASSWORD": "postgres",
         "HOST": "localhost",
         "PORT": "5432",
