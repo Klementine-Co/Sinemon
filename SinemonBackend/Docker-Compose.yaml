@@ -3,7 +3,7 @@ services:
   db:
     image: postgres:17
     build:
-      context: ./SinemonBackend
+      context: .
       dockerfile: postgres.dockerfile
     environment:
       POSTGRES_DB: postgres
@@ -32,12 +32,12 @@ services:
   # Django Backend (on port 8080 as required)
   backend:
     build:
-      context: ./SinemonBackend
+      context: .
       dockerfile: Dockerfile-backend.dockerfile
     working_dir: /backend_dir/mdSense
     command: python manage.py runserver 0.0.0.0:8080
     volumes:
-      - ./SinemonBackend:/backend_dir
+      - .:/backend_dir
     ports:
       - "8080:8080"
     env_file:
@@ -53,13 +53,13 @@ services:
   # RabbitMQ Consumer (masterconsumer1.py)
   consumer:
     build:
-      context: ./SinemonBackend
+      context: .
       dockerfile: Dockerfile-backend.dockerfile
     working_dir: /backend_dir/mdSense
     command: python /consumers/masterconsumer1.py
     volumes:
-      - ./SinemonBackend:/backend_dir
-      - ./SinemonBackend/mdSense/base/consumers:/consumers
+      - .:/backend_dir
+      - ./mdSense/base/consumers:/consumers
     env_file:
       - .env
     depends_on:
@@ -73,13 +73,13 @@ services:
   # Socket.IO Server (sock.py)
   socket:
     build:
-      context: ./SinemonBackend
+      context: .
       dockerfile: Dockerfile-backend.dockerfile
     working_dir: /backend_dir/mdSense
     command: python /consumers/sock.py
     volumes:
-      - ./SinemonBackend:/backend_dir
-      - ./SinemonBackend/mdSense/base/consumers:/consumers
+      - .:/backend_dir
+      - ./mdSense/base/consumers:/consumers
     ports:
       - "9000:9000"
     env_file:
@@ -101,13 +101,13 @@ services:
   restore:
     image: postgres:17
     build:
-      context: ./SinemonBackend
+      context: .
       dockerfile: postgres.dockerfile
     depends_on:
       db:
         condition: service_healthy
     volumes:
-      - ./SinemonBackend/database/backup/latest_backup_with_user.DUMP:/latest_backup_with_user.DUMP
+      - ./database/backup/latest_backup_with_user.DUMP:/latest_backup_with_user.DUMP
     environment:
       PGPASSWORD: postgres
     entrypoint: >
