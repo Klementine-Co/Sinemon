@@ -17,7 +17,7 @@ const clientSignIn = () => {
             // 'Content-Type': 'application/x-www-form-urlencoded',
             // "Access-Control-Allow-Origin": "*",
             'Accept': 'application/json',
-            'Host': `${ API.IPADDR }`
+            'Host': `${ API.ORM_IPADDR }`
         },
         validateStatus: function ( status: Number ) {
             return status as number <= 500; // Reject only if the status code is greater than or equal to 500

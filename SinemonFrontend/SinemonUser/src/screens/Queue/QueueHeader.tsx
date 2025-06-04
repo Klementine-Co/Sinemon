@@ -544,23 +544,7 @@ export class QueueHeader extends React.Component<
               { this.props.queue.queuedata.data.prov.provider.user.last_name }
             </Text>
           </View>
-          {/* <Image
-            source={ {
-              uri:
-                API.IPADDR +
-                ":8003" +
-                this.props.queue.queuedata.data.prov.provider.user.icon,
-            } }
-            resizeMode="cover"
-            style={ {
-              position: "absolute",
-              height: "80%",
-              width: "15%",
-              top: 5,
-              right: 15,
-              borderRadius: 12,
-            } }
-          /> */}
+         
         </View>
       );
     } else {
