@@ -1,4 +1,0 @@
-pg_dump -U postgres -W -F c postgres > 0825_database_backup.DUMP
-
-
-pg_restore -U postgres -d postgres 0825_database_backup.DUMP
