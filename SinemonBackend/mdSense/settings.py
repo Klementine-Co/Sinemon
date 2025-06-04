@@ -92,12 +92,18 @@ else:
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-import socket
+# import socket
 
-hostname = socket.gethostname() + ".local"
-ipaddress = socket.gethostbyname(hostname)
-print(ipaddress)
-ALLOWED_HOSTS = [ipaddress]
+# hostname = socket.gethostname() + ".local"
+# ipaddress = socket.gethostbyname(hostname)
+# print(ipaddress)
+# ALLOWED_HOSTS = [ipaddress]
+ALLOWED_HOSTS = [
+    "backend",         # internal Docker hostname
+    "0.0.0.0",         # Docker and local browser access
+    "localhost",       # host machine browser
+    "127.0.0.1",       # alternate local IP
+]
 
 APP_LABEL = "base"
 
@@ -486,7 +492,8 @@ DATABASES = {
         "NAME": "postgres",
         "USER": "postgres",
         "PASSWORD": "postgres",
-        "HOST": "localhost",
+        # "HOST": "localhost",
+        "HOST": os.environ.get("DB_HOST", "db"), #For docker
         "PORT": "5432",
         "OPTIONS": {"options": "-c search_path=django,public,medbaseca"},
     }
