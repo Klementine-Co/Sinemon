@@ -1,15 +1,16 @@
-version: "3.9"
-
 services:
   # PostgreSQL Database
   db:
-    image: postgres:14
+    image: postgres:17
+    build:
+      context: ./SinemonBackend
+      dockerfile: postgres.dockerfile
     environment:
       POSTGRES_DB: postgres
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
     volumes:
-      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+      # - ./init.sql:/docker-entrypoint-initdb.d/init.sql
       - postgres_data:/var/lib/postgresql/data
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U postgres"]
@@ -32,10 +33,11 @@ services:
   backend:
     build:
       context: ./SinemonBackend
-    working_dir: /Sinemon/SinemonBackend/mdSense
+      dockerfile: Dockerfile-backend.dockerfile
+    working_dir: /backend_dir/mdSense
     command: python manage.py runserver 0.0.0.0:8080
     volumes:
-      - .:/Sinemon
+      - ./SinemonBackend:/backend_dir
     ports:
       - "8080:8080"
     env_file:
@@ -52,10 +54,11 @@ services:
   consumer:
     build:
       context: ./SinemonBackend
-    working_dir: /Sinemon/SinemonBackend/mdSense
+      dockerfile: Dockerfile-backend.dockerfile
+    working_dir: /backend_dir/mdSense
     command: python /consumers/masterconsumer1.py
     volumes:
-      - .:/Sinemon
+      - ./SinemonBackend:/backend_dir
       - ./SinemonBackend/mdSense/base/consumers:/consumers
     env_file:
       - .env
@@ -71,10 +74,11 @@ services:
   socket:
     build:
       context: ./SinemonBackend
-    working_dir: /Sinemon/SinemonBackend/mdSense
+      dockerfile: Dockerfile-backend.dockerfile
+    working_dir: /backend_dir/mdSense
     command: python /consumers/sock.py
     volumes:
-      - .:/Sinemon
+      - ./SinemonBackend:/backend_dir
       - ./SinemonBackend/mdSense/base/consumers:/consumers
     ports:
       - "9000:9000"
@@ -95,7 +99,10 @@ services:
 
   # One-off restore service for .DUMP file
   restore:
-    image: postgres:14
+    image: postgres:17
+    build:
+      context: ./SinemonBackend
+      dockerfile: postgres.dockerfile
     depends_on:
       db:
         condition: service_healthy

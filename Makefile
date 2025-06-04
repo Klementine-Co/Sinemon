@@ -74,4 +74,6 @@ reset_db:
 	$(DC) up -d db
 	@echo "[✓] DB restarted — re-run 'make restore_dump' or 'make migrate'"
 
+.PHONY: all
+
 all: build up ensure-env restore_dump
