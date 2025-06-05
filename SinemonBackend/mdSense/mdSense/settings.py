@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 
 from pathlib import Path
 import os
+from django.core.management.utils import get_random_secret_key as sk
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -73,7 +74,7 @@ LOGGING = {
 # SECURITY WARNING: keep the secret key used in production secret!
 try:
 
-    SECRET_KEY = os.environ["SECRET_KEY"]
+    SECRET_KEY = os.environ.get("SECRET_KEY") or sk()
     # print(SECRET_KEY)
 except KeyError as e:
     raise RuntimeError("Could not find a Secret key in env.")

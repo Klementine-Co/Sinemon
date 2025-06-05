@@ -1,12 +1,5 @@
 ## Recommend Using Python 3.9
 
-### 🔑 Regenerate the Django SECRET_KEY after cloning
-
-After cloning the repository, run the following command to generate a new SECRET_KEY
-
-```bash
-python generate_secret_key.py
-```
 
 ## **Step 2: Create and activate a virtual environment**
 
@@ -27,10 +20,10 @@ pip install -r requirements.txt
 
 
 ## **Step 4: Set up your PostgreSQL environment (If not installed please see https://www.postgresql.org/ for more info)**
-Use the latest .DUMP file
+Use the latest .DUMP file in /database/backup
 ```
 sh
-pg_restore -U {username} -d {password} file.DUMP --no-owner --no-privileges
+pg_restore -U {username} -d {password} latest_backup_with_user.DUMP --no-owner --no-privileges
 ```
 ## **Step 4.1: Set up your RabbitMQ environment (If not installed please see https://www.rabbitmq.com for more info)**
 ### Create admin user
@@ -53,6 +46,7 @@ python manage.py migrate
 ```
 
 ## **Step 6: Create superuser**
+####    Optional, default logins provided in (LOGINS.txt) if restored DB using latest_backup_with_user.DUMP
 ```
 sh
 

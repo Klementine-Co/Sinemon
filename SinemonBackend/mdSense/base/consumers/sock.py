@@ -34,7 +34,7 @@ from base.serializers.patientvisitserializer import *
 sio = socketio.AsyncServer(async_mode="asgi", ping_interval=600, ping_timeout=15)
 app = socketio.ASGIApp(sio)
 q = ExamplePublisher(
-    "amqp://guest:guest@localhost:5672/%2F?connection_attempts=3&heartbeat=3600"
+    "amqp://guest:guest@rabbitmq:5672/%2F?connection_attempts=3&heartbeat=3600"
 )
 #sio.attach(app)
 members = {}
