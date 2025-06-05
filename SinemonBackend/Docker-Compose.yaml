@@ -94,7 +94,7 @@ services:
     networks:
       - app-network
 
-  # Generate Django SECRET_KEY (run manually)
+  # Generate Django SECRET_KEY (can run manually)
   generate-secret-key:
     image: sinemonbackend-backend:latest
     entrypoint: python -c "from django.core.management.utils import get_random_secret_key as g; print(g())"

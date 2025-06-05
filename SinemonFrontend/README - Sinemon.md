@@ -72,3 +72,4 @@ npx react-native start
 
 Run ios simulator through command line (npx react-native run-ios) or Xcode.
 
+[`LOGINS.txt`](../LOGINS.txt)

@@ -89,4 +89,4 @@ clean:
 
 .PHONY: all
 
-all: build ensure-env restore_dump
+all: build ensure-env up restore_dump

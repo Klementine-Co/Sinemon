@@ -1,0 +1,20 @@
+Superuser (Django site at, http://localhost:8080/admin/): 
+    username: admin@admin.com
+    password: admin
+
+RabbitMQ panel (http://localhost:15672):
+    username:guest
+    password:guest
+
+Used for user APP via frontend.
+Member Account:
+    username:bradley34@example.org
+    password:1234
+    
+    username:melaniealvarez@example.com
+    password:1234
+
+Used for provider APP via frontend.
+Provider Account:
+    username:Benatti.atwood.david.wade@provider.com
+    password:1234

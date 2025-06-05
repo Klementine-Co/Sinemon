@@ -1,5 +1,29 @@
 # Sinemon (si · nuh · muhn)
 
+## ✅ Supported Versions
+
+
+| Tool                | Version | Managed By                               |
+| ------------------- | ------- | ---------------------------------------- |
+| **Node.js**         | 20.17.0 | [`Volta`](https://volta.sh)                |
+| **npm**             | 11.1.0  | Volta                                    |
+| **Python**          | 3.9     | [`Docker`](https://www.docker.com/get-started/)                                   |
+| **PostgreSQL**      | 17      | Docker                                   |
+| **RabbitMQ**        | 3.\*    | Docker (`rabbitmq:3-management`)         |
+| **Django**          | 3.2.12  | [`requirements.txt`](/SinemonBackend/requirements.txt) |
+| **python-socketio** | 5.13.0  | requirements.txt |
+| **pika**            | 1.3.2   | requirements.txt |
+
+## 📱 Platform Support
+
+| Platform | Supported |
+|----------|-----------|
+| iOS      | ✅         |
+| Android  | ❌         |
+
+> This project is designed specifically for iOS devices. Android is not supported yet.
+
+
 #### Local Installation of Sinemon APP
 ##### **Clone the Repository** 
 ```
@@ -8,9 +32,15 @@ sh
 git clone https://github.com/Klementine-Co/Sinemon.git
 cd Sinemon
 ```
+## 🧱 App Architecture  
 
 
-##### Using the File "Sinemon Project.docx", this README was summarized with help of AI.
+![Alt Text](app_architecure.png)
+
+
+---
+
+##### Using the File "Sinemon Project.docx", the below README was summarized with help of AI.
 # 🩺 Sinemon: Reimagining Non-Emergency Healthcare
 **Version:** 1  
 **Prepared by:** Caelon Queen  
@@ -100,7 +130,7 @@ Sinemon is a healthcare technology platform built to transform **non-emergency c
 
 ## 🤝 Contributing
 
-Contributors can help refine financial models, expand analytics capabilities, and improve regulatory tooling. All contributions should align with the mission to support ethical, equitable, and cost-effective healthcare delivery.
+Contributors can help refine code, financial models, expand analytics capabilities, and improve regulatory tooling. All contributions should align with the mission to support ethical, equitable, and cost-effective healthcare delivery.
 
 ---
 
