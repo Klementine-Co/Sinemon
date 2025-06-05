@@ -52,7 +52,7 @@ generate-secret-key:
 ensure-env:
 	@if [ ! -f $(ENV_FILE) ]; then \
 		echo "# Auto-generated .env" > $(ENV_FILE); \
-		echo "POSTGRES_DB=postgres" >> $(ENV_FILE); \
+		echo "POSTGRES_DB=sinemon_db" >> $(ENV_FILE); \
 		echo "POSTGRES_USER=postgres" >> $(ENV_FILE); \
 		echo "POSTGRES_PASSWORD=postgres" >> $(ENV_FILE); \
 		echo "DEBUG=True" >> $(ENV_FILE); \
@@ -66,7 +66,13 @@ ensure-env:
 	fi
 
 restore_dump:
-	$(DC) run restore
+	@echo "Stopping dependent containers..."
+	$(DC) stop backend consumer socket
+	@echo "Running restore job..."
+	$(DC) run --rm restore
+	@echo "Starting dependent containers again..."
+	$(DC) start backend consumer socket
+	@echo "Restore complete."
 
 reset_db:
 	@echo "[!] WARNING: Resetting database volume..."

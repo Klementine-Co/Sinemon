@@ -6,7 +6,7 @@ services:
       context: .
       dockerfile: postgres.dockerfile
     environment:
-      POSTGRES_DB: postgres
+      POSTGRES_DB: sinemon_db
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
     volumes:
@@ -56,6 +56,8 @@ services:
       context: .
       dockerfile: Dockerfile-backend.dockerfile
     working_dir: /backend_dir/mdSense
+    environment:
+      - PYTHONPATH=/backend_dir/mdSense
     command: python /consumers/masterconsumer1.py
     volumes:
       - .:/backend_dir
@@ -76,6 +78,8 @@ services:
       context: .
       dockerfile: Dockerfile-backend.dockerfile
     working_dir: /backend_dir/mdSense
+    environment:
+      - PYTHONPATH=/backend_dir/mdSense
     command: python /consumers/sock.py
     volumes:
       - .:/backend_dir
@@ -92,7 +96,7 @@ services:
 
   # Generate Django SECRET_KEY (run manually)
   generate-secret-key:
-    image: python:3.9-slim
+    image: sinemonbackend-backend:latest
     entrypoint: python -c "from django.core.management.utils import get_random_secret_key as g; print(g())"
     networks:
       - app-network
@@ -111,7 +115,13 @@ services:
     environment:
       PGPASSWORD: postgres
     entrypoint: >
-      sh -c "sleep 15 && pg_restore -U postgres -d postgres -h db /latest_backup_with_user.DUMP"
+      sh -c " 
+        sleep 15 &&
+        psql -U postgres -h db -d postgres -c \"SELECT pg_terminate_backend(pid) FROM pg_stat_activity WHERE datname='sinemon_db' AND pid <> pg_backend_pid();\" &&
+        psql -U postgres -h db -c 'DROP DATABASE IF EXISTS sinemon_db;' &&
+        psql -U postgres -h db -c 'CREATE DATABASE sinemon_db;' &&
+        pg_restore -U postgres -d sinemon_db -h db /latest_backup_with_user.DUMP
+      "
     networks:
       - app-network
 

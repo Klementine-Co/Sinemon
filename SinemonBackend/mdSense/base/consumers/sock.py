@@ -4,7 +4,7 @@ import django
 import sys
 
 # Setup Django environment
-sys.path.append("../../../mdSense/")
+sys.path.append("../../mdSense/")
 env["DJANGO_SETTINGS_MODULE"] = "mdSense.settings"
 env["DJANGO_ALLOW_ASYNC_UNSAFE"] = "true"
 django.setup()

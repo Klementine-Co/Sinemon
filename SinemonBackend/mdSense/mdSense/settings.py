@@ -74,21 +74,28 @@ LOGGING = {
 try:
 
     SECRET_KEY = os.environ["SECRET_KEY"]
-    print(SECRET_KEY)
+    # print(SECRET_KEY)
 except KeyError as e:
     raise RuntimeError("Could not find a Secret key in env.")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-import socket
+# import socket
 
-hostname = socket.gethostname() + ".local"
-ipaddress = socket.gethostbyname(hostname)
-print(ipaddress)
-ALLOWED_HOSTS = [ipaddress]
+# hostname = socket.gethostname() + ".local"
+# ipaddress = socket.gethostbyname(hostname)
+# print(ipaddress)
+# ALLOWED_HOSTS = [ipaddress]
+ALLOWED_HOSTS = [
+    "backend",         # internal Docker hostname
+    "0.0.0.0",         # Docker and local browser access
+    "localhost",       # host machine browser
+    "127.0.0.1",       # alternate local IP
+]
 
 APP_LABEL = "base"
+
 
 
 # CSRF_COOKIE_NAME = "csrftoken"
@@ -486,11 +493,12 @@ WSGI_APPLICATION = "mdSense.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": "postgres",
+        "NAME": "sinemon_db",
         "USER": "postgres",
         # 'PASSWORD': 'sU7%4qea@EQJmDHrSKSPfa',
         "PASSWORD": "postgres",
-        "HOST": "localhost",
+        # "HOST": "localhost",
+        "HOST": os.environ.get("DB_HOST", "db"), #For docker
         "PORT": "5432",
         "OPTIONS": {"options": "-c search_path=django,public,medbaseca"},
     }

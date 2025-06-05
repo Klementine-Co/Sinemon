@@ -5,7 +5,7 @@ import pika
 import django
 import sys
 
-sys.path.append("../../../mdSense/")
+sys.path.append("../../mdSense/")
 environ["DJANGO_SETTINGS_MODULE"] = "mdSense.settings"
 django.setup()
 from base.models.provider import Provider
@@ -709,7 +709,7 @@ class MasterConsumer(object):
 
 def main():
     # logging.basicConfig(level=logging.DEBUG, format=LOG_FORMAT)
-    amqp_url = "amqp://guest:guest@localhost:5672/%2F"
+    amqp_url = "amqp://guest:guest@rabbitmq:5672/%2F"
     consumer = MasterConsumer(amqp_url)
     consumers = ["lobby", "messaging"]
     # consumer.setFunctions(consumers[0])
