@@ -82,4 +82,4 @@ reset_db:
 
 .PHONY: all
 
-all: build up ensure-env restore_dump
+all: build ensure-env restore_dump
