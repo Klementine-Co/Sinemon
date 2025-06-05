@@ -80,6 +80,13 @@ reset_db:
 	$(DC) up -d db
 	@echo "[✓] DB restarted — re-run 'make restore_dump' or 'make migrate'"
 
+clean:
+	@echo "[!] Cleaning up Docker containers, volumes, and generated files..."
+	$(DC) down -v --remove-orphans
+	@echo "[✓] Docker containers and volumes removed."
+	@if [ -f .env ]; then rm .env && echo "[✓] .env file removed."; fi
+	@find . -type d -name "__pycache__" -exec rm -r {} + && echo "[✓] __pycache__ cleaned." || true
+
 .PHONY: all
 
 all: build ensure-env restore_dump
